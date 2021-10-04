@@ -4,6 +4,7 @@ class BugsService {
   async closeBug(id) {
     const foundBug = await this.getBugById(id)
     foundBug.closed = !foundBug.closed
+    foundBug.closedDate = new Date()
     await dbContext.Bugs.findByIdAndUpdate(id, foundBug)
   }
 
@@ -25,7 +26,8 @@ class BugsService {
 
   async createBug(bugData) {
     const bug = await dbContext.Bugs.create(bugData)
-    return bug.populate('creator')
+    await bug.populate('creator').execPopulate()
+    return bug
   }
 
   async getBugById(id) {

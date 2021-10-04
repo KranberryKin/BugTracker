@@ -11,6 +11,7 @@ class BugsService {
       const res = await api.get('/api/bugs')
       AppState.bugs = []
       AppState.bugs = res.data.map(b => new Bug(b))
+      logger.log('appstates bugs', AppState.bugs)
     } catch (error) {
       logger.log('What happened?', error)
     }
@@ -21,6 +22,7 @@ class BugsService {
       const res = await api.get(`api/bugs/${bugId}`)
       AppState.currentBug = {}
       AppState.currentBug = new Bug(res.data)
+      logger.log('current bug', AppState.currentBug)
     } catch (error) {
       logger.log('What Happened?', error)
     }

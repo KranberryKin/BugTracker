@@ -4,5 +4,6 @@ export class Note {
     this.body = noteData.body
     this.bugId = noteData.bugId
     this.creatorId = noteData.creatorId
+    this.creator = noteData.creator || {}
   }
 }

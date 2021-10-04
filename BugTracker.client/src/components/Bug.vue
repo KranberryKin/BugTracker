@@ -1,7 +1,7 @@
 <template>
   <div class="component col-11 mt-3">
     <router-link :to="{name: 'About'}">
-      <div class="card row d-flex flex-row py-2 selectable" @click="setCurrentBug(bug.id)">
+      <div class="card row d-flex flex-row py-2 selectable text-dark" @click="setCurrentBug(bug.id)">
         <div class="col-3">
           {{ bug.title }}
         </div>
@@ -12,7 +12,7 @@
           Priority: {{ bug.priority }}
         </div>
         <div class="col-3">
-          <i class="mdi" :class="bug.closed ? 'text-danger mdi-alpha-c-circle' : 'text-success mdi-alpha-o-circle' "></i>
+          <i class="mdi mdi-36px" :class="bug.closed ? 'text-danger mdi-alpha-c-circle' : 'text-success mdi-alpha-o-circle' "></i>
         </div>
       </div>
     </router-link>
