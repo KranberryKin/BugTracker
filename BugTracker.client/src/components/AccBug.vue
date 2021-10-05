@@ -2,7 +2,7 @@
   <div class="component col-lg-12 mt-3">
     <div class="card row d-flex flex-row py-2 selectable text-dark" @click="setCurrentBug(bug.bug.id)">
       <div class="col-lg-3">
-        {{ bug.bug.name }}
+        {{ bug.bug.title }}
       </div>
       <div class="col-lg-3">
         <img :src="bug.tracker.picture" alt="" class="icon">
