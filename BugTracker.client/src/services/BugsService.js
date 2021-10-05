@@ -65,6 +65,7 @@ class BugsService {
       const res = await api.put(`api/bugs/${bugId}`, bugData)
       const bugIndex = AppState.bugs.findIndex(b => b.bugId === bugId)
       AppState.bugs[bugIndex] = new Bug(res.data)
+      AppState.currentBug = new Bug(res.data)
     } catch (error) {
       logger.log('What Happened?', error)
     }
@@ -75,8 +76,11 @@ class BugsService {
       logger.log(bugId)
       const res = await api.delete(`api/bugs/${bugId}`)
       const bugIndex = AppState.bugs.findIndex(b => b.bugId === bugId)
-      AppState.bugs[bugIndex] = new Bug(res.data)
-      router.push({ name: 'Home' })
+      const bug = new Bug(res.data)
+      AppState.currentBug = bug
+      AppState.bugs[bugIndex] = bug
+      logger.log('current bug', AppState.currentBug)
+      // router.push({ name: 'Home' })
     } catch (error) {
       logger.log('What Happened?', error)
     }

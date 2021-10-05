@@ -6,6 +6,7 @@ class BugsService {
     foundBug.closed = !foundBug.closed
     foundBug.closedDate = new Date()
     await dbContext.Bugs.findByIdAndUpdate(id, foundBug)
+    return foundBug
   }
 
   async editBug(id, body) {

@@ -21,6 +21,10 @@ class TrackedBugsService {
     createdTrackedBug.populate('bug')
     return createdTrackedBug.populate('tracker')
   }
+
+  async getUserTrackingByBugId(BugId) {
+
+  }
 }
 
 export const trackedBugsService = new TrackedBugsService()

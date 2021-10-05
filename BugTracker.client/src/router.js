@@ -15,6 +15,7 @@ const routes = [
     path: '/bugdetails/:id',
     name: 'BugDetails',
     props: route => ({ id: route.params.id }),
+    beforeEnter: authGuard,
     component: loadPage('BugDetails')
   },
   {
