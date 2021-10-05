@@ -85,11 +85,12 @@ export default {
             break
           }
           case 'true': {
-            AppState.filteredBugs = AppState.bugs.find(b => b.closed === true)
+            AppState.filteredBugs = AppState.bugs.filter(b => b.closed === true)
             break
           }
           case 'false': {
-            AppState.filteredBugs = AppState.bugs.find(b => b.closed === false)
+            AppState.filteredBugs = AppState.bugs.filter(b => b.closed === false)
+            break
           }
         }
       }
