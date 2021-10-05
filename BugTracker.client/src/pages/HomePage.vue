@@ -19,6 +19,7 @@
           </div>
           <div class="col-lg-3">
             <h6>Priority</h6>
+            <i class="mdi mdi-"></i>
           </div>
           <div class="col-lg-2">
             <h6>Updated At</h6>
@@ -56,24 +57,26 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, ref } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
 export default {
   name: 'Home',
   setup() {
-    const first = ''
+    const sorting = ref(false)
     onMounted(async() => {
       await bugsService.getAllBugs()
     })
     return {
-      first,
+      sorting,
       allBugs: computed(() => AppState.bugs),
       filteredBugs: computed(() => AppState.filteredBugs),
       selectedStatus: 'all',
       sortByPriority(a, b) {
-        // if (sorting.value) {
-        // }
+        if (sorting.value) {
+          return b.priority - a.priority
+        }
+        return a.priority - b.priority
       },
       onSelectedStatusChanged() {
         switch (this.selectedStatus) {
