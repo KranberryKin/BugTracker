@@ -1,7 +1,7 @@
 import { bugsService } from '../services/BugsService'
 import BaseController from '../utils/BaseController'
 import { BadRequest, Forbidden } from '../utils/Errors'
-// import { Auth0Provider } from '@bcwdev/auth0provider'
+import { Auth0Provider } from '@bcwdev/auth0provider'
 
 export class BugsController extends BaseController {
   constructor() {
@@ -9,7 +9,7 @@ export class BugsController extends BaseController {
     this.router
       .get('', this.getAllBugs)
       .get('/:id', this.getBugById)
-      // .use(Auth0Provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createBug)
       .get('/:id/notes', this.getNotesByBugId)
       .get('/:id/trackedbugs', this.getTrackedBugsByBugId)

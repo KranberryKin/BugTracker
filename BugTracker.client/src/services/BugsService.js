@@ -2,6 +2,7 @@ import { AppState } from '../AppState'
 import { Bug } from '../Models/Bug'
 import { Note } from '../Models/Note'
 import { TrackedBug } from '../Models/TrackedBug'
+import { router } from '../router'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -31,7 +32,9 @@ class BugsService {
   async createBug(bugData) {
     try {
       const res = await api.post('api/bugs', bugData)
-      AppState.bugs.push(new Bug(res.data))
+      await AppState.bugs.push(new Bug(res.data))
+      AppState.currentBug = (new Bug(res.data))
+      router.push({ name: 'BugDetails', params: { id: res.data.id } })
     } catch (error) {
       logger.log('What Happened?', error)
     }
@@ -60,7 +63,7 @@ class BugsService {
   async editBug(bugId, bugData) {
     try {
       const res = await api.put(`api/bugs/${bugId}`, bugData)
-      const bugIndex = AppState.bugs.findIndex({ bugId })
+      const bugIndex = AppState.bugs.findIndex(b => b.bugId === bugId)
       AppState.bugs[bugIndex] = new Bug(res.data)
     } catch (error) {
       logger.log('What Happened?', error)
@@ -69,9 +72,11 @@ class BugsService {
 
   async closeBug(bugId) {
     try {
+      logger.log(bugId)
       const res = await api.delete(`api/bugs/${bugId}`)
-      const bugIndex = AppState.bugs.findIndex({ bugId })
+      const bugIndex = AppState.bugs.findIndex(b => b.bugId === bugId)
       AppState.bugs[bugIndex] = new Bug(res.data)
+      router.push({ name: 'Home' })
     } catch (error) {
       logger.log('What Happened?', error)
     }

@@ -8,5 +8,6 @@ export class Bug {
     this.closedDate = bugData.closedDate
     this.creatorId = bugData.creatorId
     this.creator = bugData.creator || {}
+    this.updatedAt = bugData.updatedAt
   }
 }

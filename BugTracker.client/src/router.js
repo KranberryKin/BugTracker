@@ -12,12 +12,13 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: loadPage('AboutPage')
+    path: '/bugdetails/:id',
+    name: 'BugDetails',
+    props: route => ({ id: route.params.id }),
+    component: loadPage('BugDetails')
   },
   {
-    path: '/account',
+    path: '/',
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
