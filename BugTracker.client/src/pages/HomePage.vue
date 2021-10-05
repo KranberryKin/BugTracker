@@ -19,7 +19,7 @@
           </div>
           <div class="col-lg-3">
             <h6>Priority</h6>
-            <i class="mdi mdi-"></i>
+            <i class="mdi mdi-arrow-up"></i>
           </div>
           <div class="col-lg-2">
             <h6>Updated At</h6>
