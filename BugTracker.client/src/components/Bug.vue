@@ -26,6 +26,7 @@ import { computed } from '@vue/runtime-core'
 import { router } from '../router'
 import { bugsService } from '../services/BugsService'
 import moment from 'moment'
+import { AppState } from '../AppState'
 export default {
   props: {
     bug: {
@@ -36,6 +37,8 @@ export default {
   setup(props) {
     return {
       updatedAt: computed(() => moment(String(props.bug.updatedAt)).format('MM/DD/YYYY hh:mm')),
+      picture: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.picture) : true)),
+      name: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.name) : true)),
       async setCurrentBug(bugId) {
         await bugsService.getBugById(bugId)
         await bugsService.getNotesByBugId(bugId)

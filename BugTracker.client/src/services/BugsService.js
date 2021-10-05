@@ -11,7 +11,9 @@ class BugsService {
     try {
       const res = await api.get('/api/bugs')
       AppState.bugs = []
+      AppState.filteredBugs = []
       AppState.bugs = res.data.map(b => new Bug(b))
+      AppState.filteredBugs = res.data.map(b => new Bug(b))
       logger.log('appstates bugs', AppState.bugs)
     } catch (error) {
       logger.log('What happened?', error)

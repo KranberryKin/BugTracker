@@ -29,7 +29,18 @@
         </div>
       </div>
       <div class="card-body text-center">
-        <Bug v-for="b in bugs" :key="b.id" :bug="b" />
+        <select v-model="selectedStatus" @Change="onSelectedStatusChanged()">
+          <option value="all">
+            All
+          </option>
+          <option value="false">
+            Open
+          </option>
+          <option value="true">
+            Closed
+          </option>
+        </select>
+        <Bug v-for="b in filteredBugs" :key="b.id" :bug="b" />
       </div>
     </div>
   </div>
@@ -51,11 +62,34 @@ import { bugsService } from '../services/BugsService'
 export default {
   name: 'Home',
   setup() {
+    const first = ''
     onMounted(async() => {
       await bugsService.getAllBugs()
     })
     return {
-      bugs: computed(() => AppState.bugs)
+      first,
+      allBugs: computed(() => AppState.bugs),
+      filteredBugs: computed(() => AppState.filteredBugs),
+      selectedStatus: 'all',
+      sortByPriority(a, b) {
+        // if (sorting.value) {
+        // }
+      },
+      onSelectedStatusChanged() {
+        switch (this.selectedStatus) {
+          case 'all': {
+            AppState.filteredBugs = AppState.bugs
+            break
+          }
+          case 'true': {
+            AppState.filteredBugs = AppState.bugs.find(b => b.closed === true)
+            break
+          }
+          case 'false': {
+            AppState.filteredBugs = AppState.bugs.find(b => b.closed === false)
+          }
+        }
+      }
     }
   }
 }
