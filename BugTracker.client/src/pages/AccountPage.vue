@@ -3,18 +3,25 @@
     <h1>Welcome {{ account.name }}</h1>
     <img class="rounded" :src="account.picture" alt="" />
     <p>{{ account.email }}</p>
+    <AccBug v-for="b in bugs" :key="b.id" :bug="b" />
   </div>
 </template>
 
 <script>
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
+import { accountService } from '../services/AccountService'
+import { logger } from '../utils/Logger'
 export default {
   name: 'Account',
   setup() {
     onMounted(async() => {
+      await accountService.getAccountTrackedBugs()
     })
+    const bugs = computed(() => AppState.accountTrackedBugs)
+    logger.log('bugs', bugs)
     return {
+      bugs,
       account: computed(() => AppState.account)
     }
   }

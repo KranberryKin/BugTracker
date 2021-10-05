@@ -6,8 +6,14 @@
         <h1>{{ Cbug.title }}</h1>
       </div>
       <div class="col-2 text-center">
-        Track Bug : <br>
-        <i class="mdi mdi-plus selectable" @click="trackBug(Cbug.id, account.id)"></i>
+        <div name="TrackBug" :class="ifUserTracking ? '' : ''">
+          Track Bug : <br>
+          <i class="mdi mdi-plus selectable" @click="trackBug(Cbug.id, account.id)"></i>
+        </div>
+        <div name="UnTrackBug" :class="!ifUserTracking ? '' : '' ">
+          Un-Track Bug : <br>
+          <i class="mdi mdi-minus selectable" @click="untrackBug(Cbug.id, account.id)"></i>
+        </div>
       </div>
       <div class="col-4 text-center">
         Status: <i class="mdi mdi-36px" :class="Cbug.closed ? 'text-success mdi-alpha-c-circle' : 'text-danger mdi-alpha-o-circle' "></i>
@@ -21,10 +27,10 @@
     <div class="my-2 container-fluid">
       <div class="row text-center">
         <div class="col-2 mt-1">
-          <img :src="Cbug.creator.picture" class="rounded icon"> <br>
+          <img :src="picture" class="rounded icon">
         </div>
         <div class="col-2">
-          Reported by: <br> {{ Cbug.creator.name }}
+          Reported by: <br> {{ name }}
         </div>
         <div class="col-2" :class="Cbug.priority == 5 ? 'text-danger' : Cbug.priority <= 2 ? 'text-success' : Cbug.priority <= 4 ? 'text-warning' : ''">
           Priority: <br>
@@ -91,7 +97,7 @@ import { logger } from '../utils/Logger'
 import { router } from '../router'
 import { trackedBugsService } from '../services/TrackedBugsService'
 export default {
-  name: 'AboutPage',
+  name: 'BugDetails',
   setup() {
     onBeforeMount(async() => {
       const foundBugId = router.currentRoute._value.params.id
@@ -102,12 +108,16 @@ export default {
     })
     const account = computed(() => AppState.account)
     const notes = computed(() => AppState.notes)
-    const hidden = computed(() => AppState.currentBug.creator.id !== AppState.account.id || AppState.currentBug.Closed)
-    logger.log(account)
+    const ifUserTracking = computed(() => AppState.currentTrackedBugs.includes(t => t.accountId === account.id))
+    logger.log('account', account)
+    logger.log('traacker', ifUserTracking)
     return {
-      hidden,
       account,
       notes,
+      ifUserTracking,
+      picture: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.picture) : true)),
+      name: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.name) : true)),
+      hidden: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.id !== AppState.account.id || AppState.currentBug.Closed) : true)),
       Cbug: computed(() => AppState.currentBug),
       trackedBugs: computed(() => AppState.currentTrackedBugs),
       updatedAt: computed(() => moment(String(AppState.currentBug.updatedAt)).format('MM/DD/YYYY hh:mm')),
@@ -119,6 +129,15 @@ export default {
         bugData.bugId = bugId
         bugData.accountId = accountID
         await trackedBugsService.createTrackedBug(bugData)
+        await bugsService.getTrackedByBugId(bugId)
+      },
+      async untrackBug(bugId, accountId) {
+        const foundTrackedBug = AppState.currentTrackedBugs.find(t => t.bugId === bugId && t.accountId === accountId
+        )
+        await trackedBugsService.deleteTrackedBug(foundTrackedBug.id)
+        await bugsService.getTrackedByBugId(bugId)
+
+        logger.log('found tracked bug', foundTrackedBug)
       }
     }
   }
