@@ -12,7 +12,7 @@
         Priority: {{ bug.bug.priority }}
       </div>
       <div class="col-lg-2">
-        {{ bug.bug.updatedAt }}
+        {{ updatedAt }}
       </div>
       <div class="col-lg-1">
         <i class="mdi mdi-36px" :class="bug.bug.closed ? 'text-success mdi-alpha-c-circle' : 'text-danger mdi-alpha-o-circle' "></i>
@@ -40,7 +40,7 @@ export default {
         await bugsService.getBugById(bugId)
         await bugsService.getNotesByBugId(bugId)
         await bugsService.getTrackedByBugId(bugId)
-        router.push({ name: 'BugDetails', params: { id: props.bug.id } })
+        router.push({ name: 'BugDetails', params: { id: props.bug.bug.id } })
       }
     }
   }

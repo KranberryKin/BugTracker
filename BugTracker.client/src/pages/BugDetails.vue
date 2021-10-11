@@ -70,6 +70,7 @@
       </div>
     </div>
   </div>
+
   <Modal id="note-modal">
     <template #modal-title>
       <h5>New Note</h5>
@@ -78,6 +79,7 @@
       <NoteForm />
     </template>
   </Modal>
+  
   <Modal id="bug-modal">
     <template #modal-title>
       <h5>Update Bug?</h5>
