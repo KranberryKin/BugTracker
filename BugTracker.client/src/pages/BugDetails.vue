@@ -79,7 +79,7 @@
       <NoteForm />
     </template>
   </Modal>
-  
+
   <Modal id="bug-modal">
     <template #modal-title>
       <h5>Update Bug?</h5>

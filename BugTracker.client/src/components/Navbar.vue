@@ -1,10 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-grey bg-grey px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img
           alt="logo"
-          src="//placehold.it/100x100"
+          src="https://icon-library.com/images/bug-icon/bug-icon-18.jpg"
+          class=""
           height="45"
         />
       </div>
