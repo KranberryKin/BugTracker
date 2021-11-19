@@ -19,7 +19,7 @@
           </div>
           <div class="col-lg-3 col-3">
             <h6>Priority</h6>
-            <i class="mdi action" :class="filter != 'default' ? (filter != 'topP' ? (filter = 'botP' ? 'mdi-arrow-down' : '') : 'mdi-arrow-up') : 'mdi-circle'" @click="sortByPriority()"></i>
+            <i class="mdi action" :class="filter != 'default' ? (filter != 'topP' ? (filter = 'botP' ? 'mdi-arrow-up' : '') : 'mdi-arrow-down') : 'mdi-circle'" @click="sortByPriority()"></i>
           </div>
           <div class="col-lg-2 col-2">
             <h6>Updated At</h6>
