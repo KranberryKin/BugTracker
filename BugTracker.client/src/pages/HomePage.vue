@@ -8,23 +8,23 @@
         </button>
       </div>
     </div>
-    <div class="col-lg-11 card my-3 py-3 bg-warning">
+    <div class="col-11 card my-3 py-3 bg-warning">
       <div class="card-header">
         <div class="row px-2 text-center">
-          <div class="col-lg-3">
+          <div class="col-lg-3 col-2">
             <h6>Title</h6>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-3 col-3">
             <h6>Creator</h6>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-3 col-3">
             <h6>Priority</h6>
-            <i class="mdi mdi-arrow-up"></i>
+            <i class="mdi mdi-arrow-up action" @click="sortByPriority()"></i>
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-2 col-2">
             <h6>Updated At</h6>
           </div>
-          <div class="col-lg-1">
+          <div class="col-lg-1 col-2">
             <h6>Status</h6>
           </div>
         </div>
