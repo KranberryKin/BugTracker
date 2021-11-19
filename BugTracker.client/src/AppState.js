@@ -9,5 +9,6 @@ export const AppState = reactive({
   notes: [],
   currentTrackedBugs: [],
   currentBug: {},
-  filteredBugs: []
+  filteredBugs: [],
+  filtered: 'default'
 })

@@ -19,7 +19,7 @@
           </div>
           <div class="col-lg-3 col-3">
             <h6>Priority</h6>
-            <i class="mdi mdi-arrow-up action" @click="sortByPriority()"></i>
+            <i class="mdi action" :class="filter = 'default' ? 'mdi-circle' : filter = 'topP' ? 'mdi-arrow-up': filter = 'botP' ? 'mdi-arrow-down' : ''" @click="sortByPriority()"></i>
           </div>
           <div class="col-lg-2 col-2">
             <h6>Updated At</h6>
@@ -69,14 +69,42 @@ export default {
     })
     return {
       sorting,
+      filter: computed(() => AppState.filtered),
       allBugs: computed(() => AppState.bugs),
       filteredBugs: computed(() => AppState.filteredBugs),
       selectedStatus: 'all',
-      sortByPriority(a, b) {
-        if (sorting.value) {
-          return b.priority - a.priority
+      sortByPriority() {
+        switch (this.filter) {
+          case 'default':
+            AppState.filtered = 'topP'
+            break
+          case 'topP':
+            AppState.filtered = 'botP'
+            break
+          case 'botP':
+            AppState.filtered = 'default'
+            break
         }
-        return a.priority - b.priority
+        const string = AppState.filtered
+        switch (string) {
+          case 'default':
+            bugsService.getAllBugs()
+            break
+          case 'topP':
+            AppState.filteredBugs.sort((a, b) =>
+              a.priority - b.priority
+            )
+            break
+          case 'botP':
+            AppState.filteredBugs.sort((a, b) =>
+              b.priority - a.priority
+            )
+            break
+        }
+        // if (sorting.value) {
+        //   return b.priority - a.priority
+        // }
+        // return a.priority - b.priority
       },
       onSelectedStatusChanged() {
         switch (this.selectedStatus) {

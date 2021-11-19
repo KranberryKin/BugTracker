@@ -10,17 +10,18 @@
           Track Bug : <br>
           <i class="mdi mdi-plus selectable" @click="trackBug(Cbug.id, account.id)"></i>
         </div>
+      </div>
+      <div class="col-2 text-center">
         <div name="UnTrackBug" :class="!ifUserTracking ? '' : '' ">
           Un-Track Bug : <br>
           <i class="mdi mdi-minus selectable" @click="untrackBug(Cbug.id, account.id)"></i>
         </div>
       </div>
-      <div class="col-4 text-center">
+      <div class="col-3 text-center">
         Status: <i class="mdi mdi-36px" :class="Cbug.closed ? 'text-success mdi-alpha-c-circle' : 'text-danger mdi-alpha-o-circle' "></i>
       </div>
-      <div class="col-2 text-center" :class="hidden ? 'visually-hidden' : ''">
-        Edit Bug : <br>
-        <i class="mdi mdi-24px selectable text-info mdi-lead-pencil" data-bs-toggle="modal" data-bs-target="#bug-modal"></i>
+      <div class="col-1 text-center" :class="hidden ? 'visually-hidden' : ''">
+        <i class="mdi mdi-24px selectable text-info mdi-lead-pencil" title="Edit Bug" data-bs-toggle="modal" data-bs-target="#bug-modal"></i>
       </div>
     </div>
     <!-- Bug Information and Tracking -->
