@@ -122,7 +122,7 @@ export default {
       ifUserTracking,
       picture: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.picture) : true)),
       name: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.name) : true)),
-      hidden: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.id !== AppState.account.id || AppState.currentBug.Closed) : true)),
+      hidden: computed(() => (AppState.currentBug.creator !== undefined ? (AppState.currentBug.creator.id === AppState.account.id ? AppState.currentBug.closed : true) : true)),
       Cbug: computed(() => AppState.currentBug),
       trackedBugs: computed(() => AppState.currentTrackedBugs),
       updatedAt: computed(() => moment(String(AppState.currentBug.updatedAt)).format('MM/DD/YYYY hh:mm')),
