@@ -3,7 +3,9 @@
     <h1>Welcome {{ account.name }}</h1>
     <img class="rounded" :src="account.picture" alt="" />
     <p>{{ account.email }}</p>
-    <AccBug v-for="b in bugs" :key="b.id" :bug="b" />
+    <div class="row justify-content-center">
+      <AccBug v-for="b in bugs" :key="b.id" :bug="b" />
+    </div>
   </div>
 </template>
 

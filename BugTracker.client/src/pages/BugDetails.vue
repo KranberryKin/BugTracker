@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <!-- Bug Header -->
-    <div class="card flex-row pt-2">
+    <div class="card flex-row pt-2 bg-warning">
       <div class="col-4 text-center">
         <h1>{{ Cbug.title }}</h1>
       </div>
@@ -34,8 +34,10 @@
           Reported by: <br> {{ name }}
         </div>
         <div class="col-2" :class="Cbug.priority == 5 ? 'text-danger' : Cbug.priority <= 2 ? 'text-success' : Cbug.priority <= 4 ? 'text-warning' : ''">
-          Priority: <br>
-          {{ Cbug.priority }}
+          <p class="card bg-dark">
+            Priority: <br>
+            {{ Cbug.priority }}
+          </p>
         </div>
         <div class="col-3">
           Updated At: <br>

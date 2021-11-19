@@ -1,6 +1,6 @@
 <template>
   <div class="component">
-    <img :src="bug.tracker.picture" :title="bug.tracker.name" class="icon">
+    <img :src="bug.tracker.picture" :title="bug.tracker.name" class="icon rounded">
   </div>
 </template>
 

@@ -1,11 +1,11 @@
 <template>
-  <div class="component col-lg-12 mt-3">
+  <div class="component col-10 mt-3">
     <div class="card row d-flex flex-row py-2 selectable text-dark" @click="setCurrentBug(bug.bug.id)">
       <div class="col-lg-3">
         {{ bug.bug.title }}
       </div>
       <div class="col-lg-3">
-        <img :src="bug.tracker.picture" alt="" class="icon">
+        <img :src="bug.tracker.picture" alt="" class="icon rounded">
         {{ bug.tracker.name }}
       </div>
       <div class="col-lg-3" :class="bug.bug.priority == 5 ? 'text-danger' : bug.bug.priority <= 2 ? 'text-success' : bug.bug.priority <= 4 ? 'text-warning' : ''">
