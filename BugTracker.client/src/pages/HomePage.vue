@@ -44,16 +44,15 @@
         <Bug v-for="b in filteredBugs" :key="b.id" :bug="b" />
       </div>
     </div>
+    <Modal id="bug-modal">
+      <template #modal-title>
+        <h5>New Bug?</h5>
+      </template>
+      <template #modal-body>
+        <BugForm />
+      </template>
+    </Modal>
   </div>
-
-  <Modal id="bug-modal">
-    <template #modal-title>
-      <h5>New Bug?</h5>
-    </template>
-    <template #modal-body>
-      <BugForm />
-    </template>
-  </Modal>
 </template>
 
 <script>
